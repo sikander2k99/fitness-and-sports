@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Registration Form -->
+    <div class="registration-container">
+        <div class="form-box">
+            <h2>Register</h2>
+            <form action="#" id="registrationForm">
+                <div class="input-box">
+                    <input type="text" id="fullname" required>
+                    <label>Full Name</label>
+                    <i></i>
+                    <span class="error-message" id="fullnameError"></span>
+                </div>
+                <div class="input-box">
+                    <input type="email" id="email" required>
+                    <label>Email</label>
+                    <i></i>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="password" required>
+                    <label>Password</label>
+                    <i></i>
+                    <div class="password-strength" id="passwordStrength"></div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="confirmPassword" required>
+                    <label>Confirm Password</label>
+                    <i></i>
+                    <span class="error-message" id="confirmPasswordError"></span>
+                </div>
+                <button type="submit" class="btn">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript for Form Validation and Password Strength -->
+    <script>
+        const form = document.getElementById('registrationForm');
+        const fullname = document.getElementById('fullname');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const passwordStrength = document.getElementById('passwordStrength');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();  // Prevent form from submitting immediately
+            validateForm();
+        });
+
+        password.addEventListener('input', () => {
+            checkPasswordStrength(password.value);
+        });
+
+        function validateForm() {
+            // Reset previous error messages
+            resetErrors();
+
+            // Full Name validation
+            if (fullname.value.trim() === "") {
+                document.getElementById('fullnameError').innerText = "Full name is required";
+            }
+
+            // Email validation (simple regex pattern)
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email.value)) {
+                document.getElementById('emailError').innerText = "Enter a valid email";
+            }
+
+            // Password validation
+            if (password.value.length < 8) {
+                document.getElementById('passwordError').innerText = "Password must be at least 8 characters long";
+            }
+
+            // Confirm password validation
+            if (password.value !== confirmPassword.value) {
+                document.getElementById('confirmPasswordError').innerText = "Passwords do not match";
+            }
+        }
+
+        function resetErrors() {
+            document.getElementById('fullnameError').innerText = "";
+            document.getElementById('emailError').innerText = "";
+            document.getElementById('passwordError').innerText = "";
+            document.getElementById('confirmPasswordError').innerText = "";
+        }
+
+        function checkPasswordStrength(password) {
+            const strengthBar = passwordStrength;
+            strengthBar.innerHTML = ''; // Reset strength bar
+
+            let strength = 0;
+            if (password.length >= 8) strength += 1;
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[a-z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+
+            const strengthLevel = ["Weak", "Fair", "Good", "Strong", "Very Strong"];
+            strengthBar.innerHTML = `<span class="strength ${strengthLevel[strength].toLowerCase()}">${strengthLevel[strength]}</span>`;
+        }
+    </script>
+</body>
+</html>

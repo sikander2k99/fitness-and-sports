@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login & Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Container for the login/registration form -->
+    <div class="form-container">
+        <!-- Login Form -->
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <input type="email" required>
+                    <label>Email</label>
+                    <i></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" required>
+                    <label>Password</label>
+                    <i></i>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox"> Remember Me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="form-box register">
+            <h2>Register</h2>
+            <form action="#">
+                <div class="input-box">
+                    <input type="text" required>
+                    <label>Full Name</label>
+                    <i></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" required>
+                    <label>Email</label>
+                    <i></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" required>
+                    <label>Password</label>
+                    <i></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" required>
+                    <label>Confirm Password</label>
+                    <i></i>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="login-register">
+                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const registerLink = document.querySelector('.register-link');
+        const loginLink = document.querySelector('.login-link');
+        const formContainer = document.querySelector('.form-container');
+        
+        registerLink.addEventListener('click', () => {
+            formContainer.classList.add('active');
+        });
+        
+        loginLink.addEventListener('click', () => {
+            formContainer.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
